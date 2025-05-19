@@ -1,0 +1,69 @@
+:-route - (home and etc) - localhost:3000/(home)/ - bu yazıldığında next js route-u anlar fakat url-de yazdırmaz.
+
+:-layout.tsx - html structure - parent div - styles - flex flex-col min-h-screen, footer-un en altta kalmasını istiyorsak, main-e class-na bunu yazıcaz - main - styles - flex-1 : artık footer tüm sayfalar için otomatik en altta kalıcak.
+
+:-asChild term - Shadcn gibi kütüphanelerde kullanılır. Manası şu, Button componenti içerisinde diyelim Link yazarsak ve asChild kullanmazsak, Button componenti bir button elementi üretir ve a elementini de onun içerisine koyar. Bu semantik açıdan yanlış ve bazı durumlarda hatta çalışmaya bilir. asChild method-u Button component-ne verildiği zaman şunu der: içinde kullandığın Link elementini button-nun yerine koy, ona verilen stiller a elementine de uygula. Ve boylece Button componenti yalnizca a elementi uretmis olur. Bu da kod bakımından çok temiz ve CEO tarafından da faydalı olur.
+
+:-page.tsx & index.tsx - Bunlar aralarındaki en büyük fark: page yazdığımızda route olarak belirleniyor. İndex yazdığımızda ise component olarak tasarlanıyor.
+
+:-Position top bottom left right (example: -2px -3px) - Tailwindde -bottom-3 şeklinde yazıyoruz. Karşısına - işaretini koyduğumuz zaman sistem kendisi otomatik anlıyor.
+
+:-ref.current.getBoundingClientRect() - HTML elementlerinin pozisyonları hakkında (width, height, top, left, bottom, right) infolar verir.
+
+
+:-Payload
+   :-db:fresh - bu command logout oldukdan sonra parola eğer unutulursa, payload yenileniyor ve /admin route-da yeni bir parola yazarak giriş edile biliyor.
+
+   :-db:seed - bu command sayesinde direkt categories db-e aktarılıyor.
+   :- işleme mantığı tam olarak APİ-de gönderilecek olan veriler ile ilgili.
+
+
+:-tRPC - (TypeScript Remote Procedure Call), istemci ve sunucu arasında iletişimi sağlarken otomatik olarak tip paylaşımı yapmanı sağlar
+   :-API endpoint’leri yazmazsın (örneğin /api/users gibi).
+   :-Tipleri manuel olarak paylaşmazsın.
+   :-JSON şemaları ya da GraphQL şemaları yazmana gerek kalmaz.
+   :- işleme mantığı tam olarak APİ yazmaya gerek kalmadan direkt fonksiyonlarla ilişkilerin kurulması.
+
+:-Hydration errors and solves- delete html & body tags in layout.tsx in app folder - bunun sebebi (home) içinde layout olduğundan onlar her seferinde iç içe yerleştiriliyordu. Yani önceki html ile body de body içerisinde yazılıyordu. Bu da Next JS-te hiyerarşisin bozulmasına sebep oluyordu. İlkin layout-dan html ve body tag-larini çıkartdıkdan sonra sadece 1 tane olarak kalıcak duruma getirdik ve sorunu hall ettik.
+
+:-NUQS - Next.js + Zod + cookie state için yapılmış küçük bir kütüphanedir.
+   :-Nuqs = Next.js + useQueryState + Zod + Cookie
+      :-URL query string veya cookie ile global state tutmak için kullanılır.
+      :-Örneğin kullanıcı bir filtre seçti, ama bu bilgi sayfa yenilense bile kaybolmasın istiyorsun.
+      :-Redux veya context kullanmak yerine, Nuqs ile bu state'i cookie'de saklayabilirsin.
+
+   Ne zaman kullanılır? :
+      :-Filtreleme (kategori, fiyat aralığı gibi)
+      :-Kullanıcı tercihleri (tema: dark/light)
+      :-Sıralama seçenekleri
+      :-Arama terimleri
+      :-Sayfa yeniden yüklense bile hatırlanması gereken geçici veriler
+
+:-{new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD"
+}).format(price)} - 
+         :-Intl.NumberFormat - JavaScript’in dahili bir sınıfıdır. Sayıları farklı ülke ve dil formatlarına göre biçimlendirmeye yarar.
+         :-"en-US" - Bu, biçimlendirmeyi Amerikan İngilizcesine göre yapmasını söyler.
+         Yani binlik ayracı olarak virgül, ondalık ayracı olarak nokta kullanır.
+         :-{ style: "currency", currency: "USD" } - Bu ayarlar şunları der: style: "currency" → Bu bir para birimi olacak. currency: "USD" → Kullanılacak para birimi Amerikan Doları olacak.
+         :-.format(price) - Bu da price adlı değişkenin değerini bu kurallara göre biçimlendirir.
+
+Payload stepBystep:
+         :-collections folder içinde yeni collection kuruluyor.
+         :-payload.config.ts içinde yeni collection yazılıyor.
+
+:-useMemo - Bir değer aktardınız ve her defa render edilmesini istenmediğinde, sadece o değer değiştiği zaman render edilmesi gerektiğinde kullanılan harika bir React hook-dur.
+
+:-useShellow - Bir karşılaştırma fonksiyonudur (shallow comparison). Genellikle Zustand gibi kütüphanelerde, component'in sadece gerçekten değişen parçaları yeniden render etmesini sağlamak için kullanılır.
+
+:-!!
+   :-!!"hello"      // true  → çünkü string boş değil
+     !!""           // false → çünkü boş string
+     !!0            // false
+     !!123          // true
+     !!null         // false
+     !!undefined    // false
+     !![]           // true → çünkü boş array bile truthy
+     !!{}           // true → boş object de truthy
+
