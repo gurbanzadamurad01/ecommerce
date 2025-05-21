@@ -65,7 +65,7 @@ export async function POST(req: Request) {
                data.id,
                {
                   expand: ["line_items.data.price.product"]
-               }
+               },
             );
 
             if(

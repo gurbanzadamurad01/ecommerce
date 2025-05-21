@@ -251,7 +251,7 @@ export interface Tag {
 export interface Order {
   id: string;
   name: string;
-  user: (string | User)[];
+  user: string | User;
   product: string | Product;
   stripeCheckoutSessionId: string;
   updatedAt: string;

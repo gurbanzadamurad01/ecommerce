@@ -14,6 +14,8 @@ interface Props {
 export const CartButton = ({ tenantSlug, productId, isPurchased }: Props) => {
   const cart = useCart(tenantSlug);
 
+  console.log(isPurchased);
+  
   if (isPurchased) {
     return (
       <Button

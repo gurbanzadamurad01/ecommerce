@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -30,12 +29,7 @@ const CheckoutButton = dynamic(
 
 export const Navbar = ({ slug }: Props) => {
   const trpc = useTRPC();
-  const options = useMemo(
-    () => trpc.tenants.getOne.queryOptions({ slug }),
-    [slug]
-  );
-
-  const { data } = useSuspenseQuery(options);
+  const { data } = useSuspenseQuery(trpc.tenants.getOne.queryOptions({ slug }));
 
   return (
     <nav className="h-20 border-b font-medium bg-white">

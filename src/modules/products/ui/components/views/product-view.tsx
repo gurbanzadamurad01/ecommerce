@@ -2,7 +2,7 @@
 
 // TODO: Add real ratings
 
-import { Fragment, useMemo } from "react";
+import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useTRPC } from "@/trpc/client";
@@ -35,12 +35,9 @@ interface ProductViewProps {
 
 export const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
   const trpc = useTRPC();
-  const queryOptions = useMemo(() => {
-    return trpc.products.getOne.queryOptions({ id: productId });
-  }, [productId, trpc.products]);
-
-  const { data } = useSuspenseQuery(queryOptions);
-
+  const { data } = useSuspenseQuery(
+    trpc.products.getOne.queryOptions({ id: productId })
+  ); 
   return (
     <div className="px-4 lg:px-12 py-10">
       <div className="border rounded-sm bg-white overflow-hidden">
@@ -119,7 +116,6 @@ export const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
                     tenantSlug={tenantSlug}
                     isPurchased={data.isPurchased}
                   />
-
                   <Button
                     variant={"elevated"}
                     className="size-12"
