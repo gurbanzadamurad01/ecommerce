@@ -10,6 +10,8 @@ import sharp from 'sharp'
 import { Categories } from './collections/Categories'
 import { Products } from './collections/Products'
 
+import { isSuperAdmin } from './lib/access';
+
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Tags } from './collections/Tags'
@@ -49,7 +51,7 @@ export default buildConfig({
       tenantsArrayField: {
         includeDefaultField: false
       },
-      userHasAccessToAllTenants: (user) => Boolean(user?.roles?.includes("super-admin"))
+      userHasAccessToAllTenants: (user) => isSuperAdmin(user)
     }),
     // storage-adapter-placeholder
   ],
