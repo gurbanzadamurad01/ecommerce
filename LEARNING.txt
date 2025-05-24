@@ -67,3 +67,5 @@ Payload stepBystep:
      !![]           // true → çünkü boş array bile truthy
      !!{}           // true → boş object de truthy
 
+:-webhook & stripe - stripe ile ödemeni local-nizde izlemek için ve APİ çalışması için bu komut gerekir:
+   :- stripe listen --forward-to localhost:3000/api/stripe/webhooks - localhost kısmını siz kendiniz belirleyeceksiniz.
