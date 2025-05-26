@@ -9,6 +9,8 @@ import { useTRPC } from "@/trpc/client";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
+import { RichText } from "@payloadcms/richtext-lexical/react";
+
 import dynamic from "next/dynamic";
 
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -37,7 +39,7 @@ export const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(
     trpc.products.getOne.queryOptions({ id: productId })
-  ); 
+  );
 
   const [isCopied, setIsCopied] = useState(false);
 
@@ -87,22 +89,32 @@ export const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
 
               <div className="hidden lg:flex px-6 py-4 items-center justify-center">
                 <div className="flex items-center gap-2">
-                  <StarRating rating={data.reviewsRating} iconClassName="size-4" />
-                  <p className="text-base font-medium">{data.reviewCount} ratings</p>
+                  <StarRating
+                    rating={data.reviewsRating}
+                    iconClassName="size-4"
+                  />
+                  <p className="text-base font-medium">
+                    {data.reviewCount} ratings
+                  </p>
                 </div>
               </div>
             </div>
 
             <div className="block lg:hidden px-6 py-4 items-center justify-center border-b">
               <div className="flex items-center gap-2">
-                <StarRating rating={data.reviewsRating} iconClassName="size-4" />
-                <p className="text-base font-medium">{data.reviewCount} ratings</p>
+                <StarRating
+                  rating={data.reviewsRating}
+                  iconClassName="size-4"
+                />
+                <p className="text-base font-medium">
+                  {data.reviewCount} ratings
+                </p>
               </div>
             </div>
 
             <div className="p-6">
               {data.description ? (
-                <p>{data.description}</p>
+                <RichText data={data.description} />
               ) : (
                 <p className="font-medium text-muted-foreground italic">
                   No description provided
@@ -130,11 +142,11 @@ export const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
 
                       setTimeout(() => {
                         setIsCopied(false);
-                      }, 1000)
+                      }, 1000);
                     }}
                     disabled={isCopied}
                   >
-                    {isCopied ? <CheckIcon /> :<LinkIcon />}
+                    {isCopied ? <CheckIcon /> : <LinkIcon />}
                   </Button>
                 </div>
 
@@ -161,14 +173,36 @@ export const ProductView = ({ tenantSlug, productId }: ProductViewProps) => {
                       <div className="font-medium">
                         {stars} {stars === 1 ? "star" : "stars"}
                       </div>
-                      <Progress value={data.ratingDistribution[stars]} className="h-[1lh]" />
-                      <div className="font-medium">{data.ratingDistribution[stars]}%</div>
+                      <Progress
+                        value={data.ratingDistribution[stars]}
+                        className="h-[1lh]"
+                      />
+                      <div className="font-medium">
+                        {data.ratingDistribution[stars]}%
+                      </div>
                     </Fragment>
                   ))}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const ProductViewSkeleton = () => {
+  return (
+    <div className="px-4 lg:px-12 py-10">
+      <div className="border rounded-sm bg-white overflow-hidden">
+        <div className="relative aspect-[3.9] border-b">
+          <Image
+            src={"/placeholder.png"}
+            alt={"placeholder"}
+            fill
+            className="object-cover"
+          />
         </div>
       </div>
     </div>
