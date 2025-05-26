@@ -36,7 +36,7 @@ export const CategoryDropdown = ({
   const onMouseLeave = () => setIsOpen(false);
 
   const toggleDropdown = () => {
-    if (category.subcategories.docs?.length) {
+    if (category.subcategories?.length) {
       setIsOpen(!isOpen);
     }
   };

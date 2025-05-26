@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon, ChevronRightIcon, Tags } from "lucide-react";
+import { ChevronDownIcon, ChevronRightIcon } from "lucide-react";
 import { useState } from "react";
 import { PriceFilter } from "./price-filter";
 import { useProductFilters } from "../../hooks/use-product-filters";
@@ -88,7 +88,7 @@ export const ProductFilters = () => {
 
       <ProductFilter title="Tags" className="border-b-0">
         <TagsFilter
-          tags={filters.tags}
+          value={filters.tags}
           onChange={(tags) => onChange("tags", tags)}
         />
       </ProductFilter>
