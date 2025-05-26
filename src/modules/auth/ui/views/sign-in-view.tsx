@@ -36,7 +36,9 @@ export const SignInView = () => {
   const login = useMutation(
     trpc.auth.login.mutationOptions({
       onSuccess: async () => {
-        await queryClient.invalidateQueries(trpc.auth.session.queryFilter());
+        const user = await queryClient.invalidateQueries(trpc.auth.session.queryFilter());
+        console.log('user', user);
+        
         router.push("/");
       },
       onError: (error) => {
