@@ -107,10 +107,16 @@ export const authRouter = createTRPCRouter({
     }
 
     // otherwise situation
-    await generateAuthCookie({
+
+    console.log("data", data);
+    
+    const userr = await generateAuthCookie({
       prefix: ctx.db.config.cookiePrefix,
       value: data.token,
     });
+
+    console.log('userr', userr);
+    
 
     return data;
   }),

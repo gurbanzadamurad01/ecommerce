@@ -17,10 +17,7 @@ export const Categories = ({ data }: Props) => {
   const params = useParams();
   const containerRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
-  const viewAllRef = useRef<HTMLDivElement>(null);
-
-  console.log("data", data);
-  
+  const viewAllRef = useRef<HTMLDivElement>(null);  
 
   const [visibleCount, setVisibleCount] = useState(data.length);
   const [isAnyHovered, setIsAnyHovered] = useState(false);
