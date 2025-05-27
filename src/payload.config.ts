@@ -67,5 +67,5 @@ export default buildConfig({
     }),
     // storage-adapter-placeholder
   ],
-  serverURL: "http://localhost:3000",
+  serverURL: process.env.NEXT_PUBLIC_APP_URL,
 });
