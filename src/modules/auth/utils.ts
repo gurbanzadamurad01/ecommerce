@@ -16,7 +16,7 @@ export const generateAuthCookie = async ({ prefix, value }: Props) => {
     value: value,
     httpOnly: true,
     path: "/",
-    sameSite: "lax",
+    sameSite: "none",
     secure: process.env.NODE_ENV === "production",
     ...(process.env.NODE_ENV === "production" && {
       domain: process.env.NEXT_PUBLIC_ROOT_DOMAIN,
