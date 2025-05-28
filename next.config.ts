@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'ecommerce-peach-ten-55.vercel.app',
-        pathname: '/media/**',
+        pathname: '/api/media/file/**',
       }
     ]
   }
