@@ -12,7 +12,13 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    domains: ["localhost"]
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ecommerce-peach-ten-55.vercel.app',
+        pathname: '/media/**',
+      }
+    ]
   }
 };
 
