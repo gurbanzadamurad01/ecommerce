@@ -5,21 +5,27 @@ const nextConfig: NextConfig = {
   /* config options here */
   turbopack: {
     rules: {
-      '*.svg': {
-        loaders: ['@svgr/webpack'],
-        as: '*.js',
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
       },
     },
   },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'ecommerce-peach-ten-55.vercel.app',
-        pathname: '/api/media/file/**',
-      }
-    ]
-  }
+        protocol: "https",
+        hostname: "ecommerce-peach-ten-55.vercel.app",
+        pathname: "/api/media/file/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "3000",
+        pathname: "/api/media/file/**",
+      },
+    ],
+  },
 };
 
 export default withPayload(nextConfig);

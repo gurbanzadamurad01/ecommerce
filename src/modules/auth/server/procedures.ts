@@ -81,8 +81,7 @@ export const authRouter = createTRPCRouter({
           code: "UNAUTHORIZED",
           message: "Failed to login",
         });
-      }
-
+      }      
       // otherwise situation
       await generateAuthCookie({
         prefix: ctx.db.config.cookiePrefix,
@@ -107,15 +106,11 @@ export const authRouter = createTRPCRouter({
     }
 
     // otherwise situation
-
-    console.log("data", data);
     
-    const userr = await generateAuthCookie({
+    await generateAuthCookie({
       prefix: ctx.db.config.cookiePrefix,
       value: data.token,
     });
-
-    console.log('userr', userr);
     
 
     return data;
