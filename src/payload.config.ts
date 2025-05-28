@@ -2,6 +2,7 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb"; // database-adapter-import
 import { payloadCloudPlugin } from "@payloadcms/payload-cloud";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import { multiTenantPlugin } from "@payloadcms/plugin-multi-tenant";
 import path from "path";
 import { buildConfig } from "payload";
@@ -19,6 +20,7 @@ import { Tenants } from "./collections/Tenants";
 import { Config } from "./payload-types";
 import { Orders } from "./collections/Orders";
 import { Reviews } from "./collections/Reviews";
+import { ENABLE_SLASH_MENU_COMMAND } from "@payloadcms/richtext-lexical/client";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -65,7 +67,13 @@ export default buildConfig({
       },
       userHasAccessToAllTenants: (user) => isSuperAdmin(user),
     }),
-    // storage-adapter-placeholder
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true
+      },
+      token:process.env.BLOB_READ_WRITE_TOKEN
+    })
   ],
   serverURL: process.env.NEXT_PUBLIC_APP_URL,
 });
