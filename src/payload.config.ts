@@ -20,7 +20,6 @@ import { Tenants } from "./collections/Tenants";
 import { Config } from "./payload-types";
 import { Orders } from "./collections/Orders";
 import { Reviews } from "./collections/Reviews";
-import { ENABLE_SLASH_MENU_COMMAND } from "@payloadcms/richtext-lexical/client";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
