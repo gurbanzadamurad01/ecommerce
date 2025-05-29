@@ -2,6 +2,8 @@
 
 import { useParams } from "next/navigation";
 import { useTRPC } from "@/trpc/client";
+import { useProductFilters } from "@/modules/products/hooks/use-product-filters";
+
 import { Categories } from "./categories";
 import { SearchInput } from "./search-input";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -9,6 +11,7 @@ import { DEFAULT_BG_COLOR } from "@/modules/home/constants";
 import { BreadcrumbNavigation } from "./breadcrumb-navigation";
 
 const SearchFilters = () => {
+  const [filters, setFilters] = useProductFilters();
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(trpc.categories.getMany.queryOptions());
 
@@ -33,7 +36,10 @@ const SearchFilters = () => {
         background: activeCategoryColor,
       }}
     >
-      <SearchInput />
+      <SearchInput
+        defaultValue={filters.search}
+        onChange={(value) => setFilters({ search: value })}
+      />
       <div className="hidden lg:block">
         <Categories data={data} />
       </div>
